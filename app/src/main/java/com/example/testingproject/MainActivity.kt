@@ -17,7 +17,11 @@ class MainActivity : AppCompatActivity() {
 //        processValues()
         runBlocking {
             val lengthOfString = namesFlow()
-                .map { it.length }
+                .onEach { Log.d(TAG, "onCreate: creating on each")}
+                .map {
+                    Log.d(TAG, "onCreate: flow is sequence")
+                    it.length
+                }
                 .filter { it < 4 }
                 .collect { Log.d(TAG, "onCreate: collect $it") }
 //                println(lengthOfString)
